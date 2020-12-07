@@ -1,4 +1,4 @@
-# pico de
+# pico wayfire
 
 dotfiles for creating a consistent look on wayfire
 
