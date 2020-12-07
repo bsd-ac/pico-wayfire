@@ -1,0 +1,8 @@
+prefix=@PREFIX@
+libdir=@LIBDIR@
+libexecdir=@LIBEXECDIR@
+
+
+Name: pico-de
+Description: minimalistic configs for wayfire and co
+Version: @VERSION@
