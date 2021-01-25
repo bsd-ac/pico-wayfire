@@ -5,11 +5,15 @@
 .Nm pico-wayfire ,
 .Nm pico-wayfire-setup
 .Nd dotfiles for creating a consistent look on wayfire
+.Sh SYNOPSIS
+.Nm
+.Op Ar help
 .Sh DESCRIPTION
 .Nm
 is a script to setup dotfiles for various software to
 create a consistent look on
-.Sy wayfire .
+.Sy wayfire
+and other companion software for wayland.
 .Pp
 .Nm
 uses the
@@ -22,7 +26,21 @@ For example, to only setup dotfiles for
 and
 .Sy waybar :
 .Bd -literal
-    $ env -i PICO_WAYFIRE_SETUP="wayfire mako waybar" pico-wayfire-setup
+    $ env -i PICO_WAYFIRE_SETUP="wayfire mako waybar" \
+        pico-wayfire-setup
+.Ed
+.Pp
+If
+.Ev PICO_WAYFIRE_SETUP
+is unset, all
+.Ar targets
+are installed.
+.Pp
+To view available
+.Ar targets ,
+run:
+.Bd -literal
+    $ pico-wayfire-setup help
 .Ed
 .Sh AUTHORS
 .Nm
