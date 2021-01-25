@@ -7,6 +7,7 @@ BINDIR ?=	$(PREFIX)/bin
 LIBDIR ?= 	$(PREFIX)/lib
 LIBEXECDIR ?=	$(PREFIX)/libexec/pico-wayfire
 DATADIR ?=	$(PREFIX)/share/pico-wayfire
+MANDIR ?=	$(PREFIX)/share/man/man1
 
 INSTALL ?=	install
 CP ?=		cp -a
@@ -19,16 +20,21 @@ SUBDIRS ?=	mako nwg-launchers pico-icons swappy \
 
 all:
 
-install: install-libexec install-data install-dirs install-pc install-setup
+install: install-libexec install-data install-dirs install-man install-pc install-setup
 
 install-dirs:
 	$(INSTALL) -d $(DESTDIR)$(BINDIR)
 	$(INSTALL) -d $(DESTDIR)$(LIBDIR)/pkgconfig
 	$(INSTALL) -d $(DESTDIR)$(LIBEXECDIR)
 	$(INSTALL) -d $(DESTDIR)$(DATADIR)
+	$(INSTALL) -d $(DESTDIR)$(MANDIR)
 
 install-data: install-dirs
 	$(CP) $(SUBDIRS) wallpaper.jpeg $(DESTDIR)$(DATADIR)
+
+install-man: install-dirs
+	$(INSTALL) -m644 man1/pico-wayfire.1 $(DESTDIR)$(MANDIR)
+	ln -sf pico-wayfire.1 $(DESTDIR)$(MANDIR)/pico-wayfire-setup.1
 
 install-pc: install-dirs
 	sed -e "s:@PREFIX@:$(PREFIX):" \

@@ -1,0 +1,32 @@
+.Dd $Mdocdate: January 24 2021 $
+.Dt PICO-WAYFIRE 1
+.Os
+.Sh NAME
+.Nm pico-wayfire ,
+.Nm pico-wayfire-setup
+.Nd dotfiles for creating a consistent look on wayfire
+.Sh SYNOPSIS
+.Nm
+.Sh DESCRIPTION
+.Nm
+is a script to setup dotfiles for various software to
+create a consistent look on
+.Sy wayfire .
+.Pp
+.Nm
+uses the
+.Ev PICO_WAYFIRE_SETUP
+environment variable as an indicator for softwares for
+which to setup the dotfiles.
+.Pp
+For example, to only setup dotfiles for
+.Sy wayfire , mako
+and
+.Sy waybar :
+.Bd -literal
+$ env -i PICO_WAYFIRE_SETUP="wayfire mako waybar" pico-wayfire-setup
+.Ed
+.Sh AUTHORS
+.Nm
+is written by
+.An Aisha Tammy Aq Mt floss@bsd.ac .
