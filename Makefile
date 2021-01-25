@@ -28,7 +28,7 @@ install-dirs:
 	$(INSTALL) -d $(DESTDIR)$(DATADIR)
 
 install-data: install-dirs
-	$(CP) $(SUBDIRS) default_wallpaper $(DESTDIR)$(DATADIR)
+	$(CP) $(SUBDIRS) wallpaper.jpeg $(DESTDIR)$(DATADIR)
 
 install-pc: install-dirs
 	sed -e "s/@PREFIX@/$(PREFIX)/" \
