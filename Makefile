@@ -34,7 +34,7 @@ install-pc: install-dirs
 	sed -e "s:@PREFIX@:$(PREFIX):" \
 	    -e "s:@BINDIR@:$(BINDIR):" \
 	    -e "s:@LIBDIR@:$(LIBDIR):" \
-	    -e "s:@LIBEXECDIR@/$(LIBEXECDIR):" \
+	    -e "s:@LIBEXECDIR@:$(LIBEXECDIR):" \
 	    -e "s:@DATADIR@:$(DATADIR):" \
 	    -e "s:@VERSION@:$(VERSION):" \
 	    pico-wayfire.pc.in > pico-wayfire.pc
