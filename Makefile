@@ -50,7 +50,7 @@ install-setup: install-dirs
 	$(INSTALL) -m755 pico-wayfire-setup -t $(DESTDIR)$(BINDIR)
 
 install-libexec: install-dirs
-	$(INSTALL) -m755 scripts/* -t $(DESTDIR)$(LIBEXEC)
+	$(CP) scripts/. $(DESTDIR)$(LIBEXEC)
 
 clean:
 	rm -f pico-wayfire.pc
