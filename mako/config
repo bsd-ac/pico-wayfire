@@ -1,0 +1,23 @@
+background-color=#111111
+border-size=1
+border-radius=5
+border-color=#800080
+text-color=#eeeeee
+font="Fira Code, JoyPixels, Font Awesome 5 Free"
+format=<b>%s</b>\n\n%b
+height=400
+width=400
+margin=10
+padding=5
+default-timeout=20000
+
+[urgency=low]
+background-color=#111111
+default-timeout=10000
+
+[urgency=high]
+background-color=#333333
+default-timeout=0
+
+[grouped]
+format=(%g) <b>%s</b>\n\n\n%b
