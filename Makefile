@@ -5,17 +5,19 @@ DESTDIR ?=
 PREFIX ?=	/usr
 BINDIR ?=	$(PREFIX)/bin
 LIBDIR ?= 	$(PREFIX)/lib
-LIBEXECDIR ?=	$(PREFIX)/libexec/pico-de
-DATADIR ?=	$(PREFIX)/share/pico-de
+LIBEXECDIR ?=	$(PREFIX)/libexec/pico-wayfire
+DATADIR ?=	$(PREFIX)/share/pico-wayfire
 
 INSTALL ?=	install
 CP ?=		cp -a
 
-SUBDIRS ?=	mako nwg-launchers oguri pico-icons swappy \
+SUBDIRS ?=	mako nwg-launchers pico-icons swappy \
 		terminator waybar wayfire
 
-.PHONY: all install install-data install-dirs install-libexec \
+.PHONY: all clean install install-data install-dirs install-libexec \
 	install-pc install-setup
+
+all:
 
 install: install-libexec install-data install-dirs install-pc install-setup
 
@@ -35,11 +37,14 @@ install-pc: install-dirs
 	    -e "s/@LIBEXECDIR@/$(LIBEXECDIR)/" \
 	    -e "s/@DATADIR@/$(DATADIR)/" \
 	    -e "s/@VERSION@/$(VERSION)/" \
-	    pico-de.pc.in > pico-de.pc
-	$(INSTALL) -m644 pico-de.pc -t $(DESTDIR)$(LIBDIR)/pkgconfig
+	    pico-wayfire.pc.in > pico-wayfire.pc
+	$(INSTALL) -m644 pico-wayfire.pc -t $(DESTDIR)$(LIBDIR)/pkgconfig
 
 install-setup: install-dirs
-	$(INSTALL) -m755 pico-de-setup -t $(DESTDIR)$(BINDIR)
+	$(INSTALL) -m755 pico-wayfire-setup -t $(DESTDIR)$(BINDIR)
 
 install-libexec: install-dirs
 	$(INSTALL) -m755 scripts/* -t $(DESTDIR)$(LIBEXEC)
+
+clean:
+	rm -f pico-wayfire.pc
