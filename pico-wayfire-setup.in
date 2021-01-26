@@ -6,16 +6,16 @@ DATADIR="@DATADIR@"
 
 ########## GENERIC FUNCTIONS
 
-info()  { printf %s\\n "${__green}${__bold}LOG${__reset}: $*"; }
-warn()  { printf %s\\n "${__yellow}${__bold}WARN${__reset}: $*" >&2; }
-error() {
+pinfo()  { printf %s\\n "${__green}${__bold}LOG${__reset}: $*"; }
+pwarn()  { printf %s\\n "${__yellow}${__bold}WARN${__reset}: $*" >&2; }
+perror() {
     __error=${1:-1}
     shift
     printf %s\\n "${__red}${__bold}ERROR${__reset}: $*" >&2
     exit "$__error"
 }
 die() {
-    error 1 "$*"
+    perror 1 "$*"
 }
 
 HELP='[PICO_WAYFIRE_TARGETS="targets"] pico-wayfire [help]'
@@ -37,11 +37,11 @@ if [ $# -eq 1 ] && [ "${1}" = "help" ]; then
     if [ ! -d "${DATADIR}" ]; then
 	die "Dirty installation - '${DATADIR}' does not exist"
     fi
-    info "Pico Wayfire v${VERSION}"
-    info "Available targets are:"
+    pinfo "Pico Wayfire v${VERSION}"
+    pinfo "Available targets are:"
     for __target in "${DATADIR}"/*; do
 	if [ -d "${__target}" ]; then
-	    info " - ${__target##*/}"
+	    pinfo " - ${__target##*/}"
 	fi
     done
     unset __target
@@ -63,14 +63,14 @@ __install_target() {
     if [ ! -d "${1}" ]; then
 	die "install target does not exist"
     fi
-    info "installing - ${1}..."
+    pinfo "installing - ${1}..."
     if [ -d "${1}/data" ]; then
 	cp -a "${1}/data/". "${HOME}"
     fi
     if [ -e "${1}/install" ] && [ -f "${1}/install" ]; then
 	. "${1}/install"
     fi
-    info "finished - ${1}"
+    pinfo "finished - ${1}"
 }
 
 if [ -z ${PICO_WAYFIRE_TARGETS+unset} ]; then
@@ -89,14 +89,14 @@ fi
 unset __target
 
 ########## FINISHED ##########
-info "Finished setting up Pico Wayfire v${VERSION}"
+pinfo "Finished setting up Pico Wayfire v${VERSION}"
 
 
-info "Setting up screenshot folders"
-mkdir -p "${HOME}"/Pictures/Screenshots || warn "Could not create ~/Pictures/screenshots folder"
+pinfo "Setting up screenshot folders"
+mkdir -p "${HOME}"/Pictures/Screenshots || pwarn "Could not create ~/Pictures/screenshots folder"
 
-info "Setting up terminator config"
-mkdir -p "${HOME}"/.config/terminator/plugins || warn "Could not create ~/.config/terminator/plugins"
+pinfo "Setting up terminator config"
+mkdir -p "${HOME}"/.config/terminator/plugins || pwarn "Could not create ~/.config/terminator/plugins"
 cp "${CDIR}"/terminator.conf "${HOME}"/.config/terminator/config || warn "Could not create ~/.config/terminator/config"
 cp "${CDIR}"/terminator-themes.py "${HOME}"/.config/terminator/plugins/ || warn "Could not create ~/.config/terminator/plugins/terminator-themes.py"
 
