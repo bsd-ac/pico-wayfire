@@ -1,12 +1,11 @@
 .Dd $Mdocdate: January 24 2021 $
-.Dt PICO-WAYFIRE 1
+.Dt PICO-WAYFIRE-SETUP 1
 .Os
 .Sh NAME
-.Nm pico-wayfire ,
 .Nm pico-wayfire-setup
 .Nd dotfiles for creating a consistent look on wayfire
 .Sh SYNOPSIS
-.Nm
+.Oo PICO_WAYFIRE_TARGETS Ns = Ns Do Ar targets Dc Oc Nm
 .Op Ar help
 .Sh DESCRIPTION
 .Nm
@@ -17,7 +16,7 @@ and other companion software for wayland.
 .Pp
 .Nm
 uses the
-.Ev PICO_WAYFIRE_SETUP
+.Ev PICO_WAYFIRE_TARGETS
 environment variable as an indicator for softwares for
 which to setup the dotfiles.
 .Pp
@@ -25,13 +24,12 @@ For example, to only setup dotfiles for
 .Sy wayfire , mako
 and
 .Sy waybar :
-.Bd -literal
-    $ env -i PICO_WAYFIRE_SETUP="wayfire mako waybar" \
-        pico-wayfire-setup
+.Bd -literal -offset width
+$ PICO_WAYFIRE_TARGETS="wayfire mako waybar" pico-wayfire-setup
 .Ed
 .Pp
 If
-.Ev PICO_WAYFIRE_SETUP
+.Ev PICO_WAYFIRE_TARGETS
 is unset, all
 .Ar targets
 are installed.
@@ -39,10 +37,12 @@ are installed.
 To view available
 .Ar targets ,
 run:
-.Bd -literal
-    $ pico-wayfire-setup help
+.Bd -literal -offset width
+$ pico-wayfire-setup help
 .Ed
 .Sh AUTHORS
 .Nm
 is written by
-.An Aisha Tammy Aq Mt floss@bsd.ac .
+.An Aisha Tammy Aq Mt floss@bsd.ac
+and maintained at
+.Lk https://github.com/bsd-ac/pico-wayfire .

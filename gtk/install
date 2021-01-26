@@ -1,0 +1,4 @@
+info "Setting up themes"
+gsettings set org.gnome.desktop.interface gtk-theme Sweet || warn "Could not change gtk-theme"
+gsettings set org.gnome.desktop.interface icon-theme pico-wayfire || warn "Could not change icon theme"
+gsettings set org.gnome.desktop.interface cursor-theme Bibata-Modern-Classic || warn "Could not change cursor theme"

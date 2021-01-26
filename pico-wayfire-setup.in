@@ -1,0 +1,102 @@
+#!/bin/sh
+
+########## VARIABLES
+VERSION="@VERSION@"
+DATADIR="@DATADIR@"
+
+########## GENERIC FUNCTIONS
+
+info()  { printf %s\\n "${__green}${__bold}LOG${__reset}: $*"; }
+warn()  { printf %s\\n "${__yellow}${__bold}WARN${__reset}: $*" >&2; }
+error() {
+    __error=${1:-1}
+    shift
+    printf %s\\n "${__red}${__bold}ERROR${__reset}: $*" >&2
+    exit "$__error"
+}
+die() {
+    error 1 "$*"
+}
+
+HELP='[PICO_WAYFIRE_TARGETS="targets"] pico-wayfire [help]'
+usage() {
+    die "usage: ${HELP}"
+}
+
+if [ -n "${TERM}" ] && [ "${TERM}" != "dumb" ]; then
+    export __bold="$(tput bold)" \
+    __red="$(tput setaf 1)" \
+    __green="$(tput setaf 2)" \
+    __yellow="$(tput setaf 3)" \
+    __reset="$(tput sgr0)"
+fi
+
+########## PICO WAYFIRE
+
+if [ $# -eq 1 ] && [ "${1}" = "help" ]; then
+    if [ ! -d "${DATADIR}" ]; then
+	die "Dirty installation - '${DATADIR}' does not exist"
+    fi
+    info "Pico Wayfire v${VERSION}"
+    info "Available targets are:"
+    for __target in "${DATADIR}"/*; do
+	if [ -d "${__target}" ]; then
+	    info " - ${__target}"
+	fi
+    done
+    unset __target
+    exit
+elif [ $# -eq 1 ] && [ "${1}" != "help" ] ; then
+    usage
+elif [ $# -gt 1 ]; then
+    usage
+fi
+
+if [ -z ${HOME+unset} ] || [ ! -d "${HOME}" ] ; then
+    die "HOME is invalid"
+fi
+
+__install_target() {
+    if [ $# -ne 1 ]; then
+	die "need an install target"
+    fi
+    if [ ! -d "${1}" ]; then
+	die "install target does not exist"
+    fi
+    info "installing - ${1}..."
+    if [ -d "${1}/data" ]; then
+	cp -a "${1}/data/". "${HOME}"
+    fi
+    if [ -e "${1}/install" ] && [ -f "${1}/install" ]; then
+	. "${1}/install"
+    fi
+    info "finished - ${1}"
+}
+
+if [ -z ${PICO_WAYFIRE_TARGETS+unset} ]; then
+    for __target in "${DATADIR}"/*; do
+	if [ -d "${__target}" ]; then
+	    __install_target "${__target}"
+	fi
+    done
+else
+    for __target in ${PICO_WAYFIRE_TARGETS}; do
+	if [ -d "${__target}" ]; then
+	    __install_target "${__target}"
+	fi
+    done
+fi
+unset __target
+
+########## FINISHED ##########
+info "Finished setting up Pico Wayfire v${VERSION}"
+
+
+info "Setting up screenshot folders"
+mkdir -p "${HOME}"/Pictures/Screenshots || warn "Could not create ~/Pictures/screenshots folder"
+
+info "Setting up terminator config"
+mkdir -p "${HOME}"/.config/terminator/plugins || warn "Could not create ~/.config/terminator/plugins"
+cp "${CDIR}"/terminator.conf "${HOME}"/.config/terminator/config || warn "Could not create ~/.config/terminator/config"
+cp "${CDIR}"/terminator-themes.py "${HOME}"/.config/terminator/plugins/ || warn "Could not create ~/.config/terminator/plugins/terminator-themes.py"
+

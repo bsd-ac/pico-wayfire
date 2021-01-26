@@ -1,9 +1,0 @@
-prefix=@PREFIX@
-bindir=@BINDIR@
-libdir=@LIBDIR@
-libexecdir=@LIBEXECDIR@
-datadir=@DATADIR@
-
-Name: pico-wayfire
-Description: minimalistic config files for wayfire and co.
-Version: @VERSION@
