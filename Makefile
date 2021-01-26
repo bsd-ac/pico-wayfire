@@ -27,8 +27,8 @@ install: all
 	$(INSTALL) -d $(DESTDIR)$(DATADIR)
 	$(INSTALL) -d $(DESTDIR)$(MANDIR)
 	$(CP) $(SUBDIRS) wallpaper.jpeg $(DESTDIR)$(DATADIR)
-	$(INSTALL) -m644 man1/pico-wayfire.1 $(DESTDIR)$(MANDIR)
-	ln -sf pico-wayfire.1 $(DESTDIR)$(MANDIR)/pico-wayfire-setup.1
+	$(INSTALL) -m644 man1/pico-wayfire-setup.1 $(DESTDIR)$(MANDIR)
+	ln -sf pico-wayfire-setup.1 $(DESTDIR)$(MANDIR)/pico-wayfire.1
 	$(INSTALL) -m755 pico-wayfire-setup -t $(DESTDIR)$(BINDIR)
 
 clean:
