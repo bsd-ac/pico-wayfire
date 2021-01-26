@@ -1,8 +1,7 @@
 * {
     border: none;
     border-radius: 5px;
-    margin: 7px;
-    font-family: JoyPixels, Noto Color Emoji, Fira Code, Font Awesome 5 Free, Font Awesome 5 Brands;
+    font-family: "Fira Code", JoyPixels, "Font Awesome 5 Free";
     font-size: 14px;
     min-height: 28px;
 }
@@ -29,6 +28,7 @@ window#waybar {
 #temperature,
 #clock,
 #battery {
+    margin: 5px;
     padding-left: 7px;
     padding-right: 7px;
     transition: none;

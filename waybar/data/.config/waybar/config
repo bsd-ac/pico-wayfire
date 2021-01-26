@@ -1,11 +1,12 @@
 {
   "layer": "top",
+  "height": "28px",
   "position": "bottom",
-  "modules-left": ["tray", "wlr/taskbar"],
+  "modules-left": ["wlr/taskbar"],
   "modules-center": [],
-  "modules-right": ["network", "pulseaudio", "temperature", "battery", "clock"],
+  "modules-right": ["tray", "pulseaudio", "network", "temperature", "battery", "clock"],
   "tray": {
-    "icon-size": 14,
+    "icon-size": 20,
     "spacing": 10,
   },
   "wlr/taskbar": {
