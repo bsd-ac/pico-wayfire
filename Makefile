@@ -10,7 +10,7 @@ MANDIR ?=	$(PREFIX)/share/man/man1
 INSTALL ?=	install
 CP ?=		cp -a
 
-SUBDIRS ?=	gtk mako nwg-launchers pico-icons swappy \
+SUBDIRS ?=	gtk mako nwg-launchers swappy \
 		terminator waybar wayfire
 
 .PHONY:	all clean install
