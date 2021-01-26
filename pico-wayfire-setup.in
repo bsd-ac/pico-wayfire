@@ -41,7 +41,7 @@ if [ $# -eq 1 ] && [ "${1}" = "help" ]; then
     info "Available targets are:"
     for __target in "${DATADIR}"/*; do
 	if [ -d "${__target}" ]; then
-	    info " - ${__target}"
+	    info " - ${__target##*/}"
 	fi
     done
     unset __target
