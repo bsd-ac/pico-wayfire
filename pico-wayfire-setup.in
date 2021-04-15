@@ -14,13 +14,13 @@ perror() {
     printf %s\\n "${__red}${__bold}ERROR${__reset}: $*" >&2
     exit "$__error"
 }
-die() {
+pdie() {
     perror 1 "$*"
 }
 
 HELP='[PICO_WAYFIRE_TARGETS="targets"] pico-wayfire [help]'
 usage() {
-    die "usage: ${HELP}"
+    pdie "usage: ${HELP}"
 }
 
 if [ -n "${TERM}" ] && [ "${TERM}" != "dumb" ]; then
@@ -35,7 +35,7 @@ fi
 
 if [ $# -eq 1 ] && [ "${1}" = "help" ]; then
     if [ ! -d "${DATADIR}" ]; then
-	die "Dirty installation - '${DATADIR}' does not exist"
+	pdie "Dirty installation - '${DATADIR}' does not exist"
     fi
     pinfo "Pico Wayfire v${VERSION}"
     pinfo "Available targets are:"
@@ -53,15 +53,15 @@ elif [ $# -gt 1 ]; then
 fi
 
 if [ -z ${HOME+unset} ] || [ ! -d "${HOME}" ] ; then
-    die "HOME is invalid"
+    pdie "HOME is invalid"
 fi
 
 __install_target() {
     if [ $# -ne 1 ]; then
-	die "need an install target"
+	pdie "need an install target"
     fi
     if [ ! -d "${1}" ]; then
-	die "install target does not exist"
+	pdie "install target '${1}' does not exist"
     fi
     pinfo "installing - ${1}..."
     if [ -d "${1}/data" ]; then
@@ -90,13 +90,3 @@ unset __target
 
 ########## FINISHED ##########
 pinfo "Finished setting up Pico Wayfire v${VERSION}"
-
-
-pinfo "Setting up screenshot folders"
-mkdir -p "${HOME}"/Pictures/Screenshots || pwarn "Could not create ~/Pictures/screenshots folder"
-
-pinfo "Setting up terminator config"
-mkdir -p "${HOME}"/.config/terminator/plugins || pwarn "Could not create ~/.config/terminator/plugins"
-cp "${CDIR}"/terminator.conf "${HOME}"/.config/terminator/config || warn "Could not create ~/.config/terminator/config"
-cp "${CDIR}"/terminator-themes.py "${HOME}"/.config/terminator/plugins/ || warn "Could not create ~/.config/terminator/plugins/terminator-themes.py"
-
