@@ -64,11 +64,14 @@ __install_target() {
 	pdie "install target '${1}' does not exist"
     fi
     pinfo "installing - ${1}..."
+    if [ -e "${1}/pre_install" ] && [ -f "${1}/pre_install" ]; then
+	. "${1}/pre_install"
+    fi
     if [ -d "${1}/data" ]; then
 	cp -a "${1}/data/". "${HOME}"
     fi
-    if [ -e "${1}/install" ] && [ -f "${1}/install" ]; then
-	. "${1}/install"
+    if [ -e "${1}/post_install" ] && [ -f "${1}/post_install" ]; then
+	. "${1}/post_install"
     fi
     pinfo "finished - ${1}"
 }
