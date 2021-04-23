@@ -84,8 +84,8 @@ if [ -z ${PICO_WAYFIRE_TARGETS+unset} ]; then
     done
 else
     for __target in ${PICO_WAYFIRE_TARGETS}; do
-	if [ -d "${__target}" ]; then
-	    __install_target "${__target}"
+	if [ -d "${DATADIR}/${__target}" ]; then
+	    __install_target "${DATADIR}/${__target}"
 	fi
     done
 fi
